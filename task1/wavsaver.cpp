@@ -16,24 +16,34 @@ uint16_t reverseBytes16U(uint16_t n)
     return (temp2 | temp1);
 }
 
-WavSaver::WavSaver(short int* data, int len)
+WavSaver::WavSaver(short* data, int len)
 {
-    this->sigToSave = (short int*)malloc(len * sizeof(short int));
-    memcpy(this->sigToSave, data, len * sizeof(short int));
+    sigToSave = new short[len * sizeof(short int)];
+    memcpy(sigToSave, data, len * sizeof(short int));
     this->len = len;
 }
 
 void WavSaver::save()
 {
-    Wav MyWavData;
-    FILE* fd = fopen("1.wav", "w");
-    for(int i = 0; i < WAV_HEADER_SIZE; i++)
-    {
-        fputc((*((uint8_t*)&MyWavData + i)), fd);
-    }
-    for(int i = 0; i < this->len * sizeof(short int); i++)
-    {
-        fputc((*((uint8_t*)this->sigToSave + i)), fd);
-    }
-    fclose(fd);
+    WavHeader MyWavHeader;
+
+    std::fstream fs;
+    fs.open("1.wav");
+
+    //fs.write(reinterpret_cast<const char*> (&MyWavHeader), sizeof(WavHeader));
+    //fs.write(reinterpret_cast<const char*> (sigToSave), sizeof(short int)*len);
+
+    fs.write((char*)(&MyWavHeader), sizeof(WavHeader));
+    fs.write((char*)(sigToSave), sizeof(short int)*len);
+
+    for(unsigned int i = 0; i < len; i++)
+        {
+            std::cout << sigToSave[i] << std::endl;
+        }
+    fs.close();
+}
+
+void WavSaver::destructSigToSave()
+{
+    delete [] sigToSave;
 }

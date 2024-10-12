@@ -2,24 +2,30 @@
 
 Noise::Noise(int samplesN, float disp)
 {
-    this->len = samplesN;
-    this->dispersion = disp;
-    this->noise = (float*)malloc(samplesN * sizeof(float));
+    len = samplesN;
+    dispersion = disp;
+    noise = new float[samplesN * sizeof(float)];
 }
 
 void Noise::generateNoise()
 {
-    float upperU = sqrtf(this->dispersion / 12.0);
-    srand(time(0));
-    if(this->len != 0)
+    float upperValue = sqrtf(dispersion * 12.0) / 2.0;
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<> distrib(-upperValue, upperValue);
+
+    for(unsigned int i = 0; i < len; i++)
     {
-        for(int i = 0; i < this->len; i++)
+        float temp = 0;
+        for (unsigned int j = 0; j < 100; j++)
         {
-            this->noise[i] = ( ((float)rand() / (float)RAND_MAX) - 0.5 ) * 2 * upperU;
+            temp += (float)distrib(gen);
         }
+        noise[i] = temp / 100.0;
     }
-    else
-    {
-        std::cout << "Noise array empty!\n";
-    }
+}
+
+void Noise::destructNoise()
+{
+    delete [] noise;
 }

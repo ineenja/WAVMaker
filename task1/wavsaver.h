@@ -21,12 +21,12 @@ typedef struct
     uint16_t audioFormat = (1);
     uint16_t numChannels = (1);
     uint32_t sampleRate = (DISC_FREQ);
-    uint32_t byteRate = (DISC_FREQ * /*sizeof(int)*/1);
+    uint32_t byteRate = (DISC_FREQ * (sizeof(short int)));
     uint16_t blockAlign = (sizeof(short int));
-    uint16_t bitsPerSample = (8 * sizeof(short int));
+    uint16_t bitsPerSample = (8 * (sizeof(short int)));
     uint32_t subchunk2Id = reverseBytes32U(0x64617461);
-    uint32_t subchunk2Size = (sizeof(short int) * (uint32_t)(CALC_SAMPLES_N(TIME)));
-}Wav;
+    uint32_t subchunk2Size = (sizeof(short int) * (CALC_SAMPLES_N(TIME)));
+}   WavHeader;
 #pragma pack(pop)
 
 class WavSaver
@@ -36,6 +36,8 @@ public:
     short int* sigToSave = nullptr;
     uint32_t len;
     void save();
+
+    void destructSigToSave();
 };
 
 #endif // WAVSAVER_H

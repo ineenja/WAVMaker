@@ -2,11 +2,10 @@
 #include <cmath>
 #include <iostream>
 #include <time.h>
-/* Для доступа к структуре данных "map", используемой для хранения распределения шума */
 #include <map>
-/* Для доступа к функции копирования блока данных memcpy */
 #include <cstring>
-//#include <fstream>
+#include <random>
+#include <fstream>
 
-#define TIME (15.0f)
+#define TIME (0.1f)
 #define CALC_SAMPLES_N(x) ((int)(x * DISC_FREQ))

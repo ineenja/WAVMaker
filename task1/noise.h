@@ -10,10 +10,12 @@ public:
     Noise(int samplesN, float disp);
 
     float* noise = nullptr;
-    int len = 0;
+    unsigned int len = 0;
     float dispersion = 0.0;
 
     void generateNoise();
+
+    void destructNoise();
 };
 
 #endif

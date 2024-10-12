@@ -3,7 +3,7 @@
 #ifndef SIGNAL_H
 #define SIGNAL_H
 
-#define TWOPI 6.28
+#define TWOPI 6.28318530718
 #define DISC_FREQ 44100
 
 class Signal
@@ -17,11 +17,12 @@ public:
     float getFreq();
     float getAmpl();
 
-    void addNoise(float* noise, int len);
-    void floatSigToShort();
+    void destructSamplesFloat32();
+
+    void destructSamplesShort();
 
 private:
-    int len;
+    unsigned int len;
     float freq;
     float ampl;
 };
