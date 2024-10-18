@@ -1,0 +1,3 @@
+"C:\Program Files\CMake\bin\cmake.exe" -E rm -f CMakeFiles\WAVmultiHarmCreator.dir/objects.a
+C:\Qt\Qt5.14.2\Tools\mingw730_64\bin\ar.exe qc CMakeFiles\WAVmultiHarmCreator.dir/objects.a @CMakeFiles\WAVmultiHarmCreator.dir\objects1.rsp
+C:\Qt\Qt5.14.2\Tools\mingw730_64\bin\g++.exe -g -Wl,--whole-archive CMakeFiles\WAVmultiHarmCreator.dir/objects.a -Wl,--no-whole-archive -o WAVmultiHarmCreator.exe -Wl,--out-implib,libWAVmultiHarmCreator.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\WAVmultiHarmCreator.dir\linkLibs.rsp
